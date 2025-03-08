@@ -202,7 +202,7 @@ cat > config.json <<EOF
     },
     {
       "tag": "vmess-ws-in",
-      "type": "vmess",
+      "type": "vless",
       "listen": "::",
       "listen_port": $VMESS_PORT,
       "users": [
