@@ -13,7 +13,7 @@ reading() { read -p "$(red "$1")" "$2"; }
 export LC_ALL=C
 HOSTNAME=$(hostname)
 USERNAME=$(whoami | tr '[:upper:]' '[:lower:]')
-export UUID=${UUID:-$(uuidgen -r)}          
+export UUID=cc8f6b11-2f22-4f03-9dfd-a7cba7511d8a          
 export NEZHA_SERVER=${NEZHA_SERVER:-''}  # v1哪吒形式：nezha.abc.com:8008,v0哪吒形式：nezha.abc.com
 export NEZHA_PORT=${NEZHA_PORT:-''}      # v1哪吒不需要此变量
 export NEZHA_KEY=${NEZHA_KEY:-''}        # v1的NZ_CLIENT_SECRET或v0的agent密钥
@@ -183,56 +183,19 @@ cat > config.json <<EOF
   },
   "inbounds": [
     {
-      "tag": "hysteria-in",
-      "type": "hysteria2",
-      "listen": "$available_ip",
-      "listen_port": $HY2_PORT,
-      "users": [
-        {
-          "password": "$UUID"
-        }
-      ],
-      "masquerade": "https://bing.com",
-      "tls": {
-        "enabled": true,
-        "alpn": ["h3"],
-        "certificate_path": "cert.pem",
-        "key_path": "private.key"
-      }
-    },
-    {
       "tag": "vmess-ws-in",
       "type": "vless",
       "listen": "::",
       "listen_port": $VMESS_PORT,
       "users": [
         {
-          "uuid": "$UUID"
+          "uuid": "cc8f6b11-2f22-4f03-9dfd-a7cba7511d8a"
         }
       ],
       "transport": {
         "type": "ws",
         "path": "/vmess-argo",
         "early_data_header_name": "Sec-WebSocket-Protocol"
-      }
-    },
-    {
-      "tag": "tuic-in",
-      "type": "tuic",
-      "listen": "$available_ip",
-      "listen_port": $TUIC_PORT,
-      "users": [
-        {
-          "uuid": "$UUID",
-          "password": "admin123"
-        }
-      ],
-      "congestion_control": "bbr",
-      "tls": {
-        "enabled": true,
-        "alpn": ["h3"],
-        "certificate_path": "cert.pem",
-        "key_path": "private.key"
       }
     }
   ],
