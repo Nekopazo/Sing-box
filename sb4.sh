@@ -199,8 +199,8 @@ cat > config.json <<EOF
       }
     },
     {
-      "tag": "vmess-ws-in",
-      "type": "vmess",
+      "tag": "vless-ws-in",
+      "type": "vless",
       "listen": "::",
       "listen_port": $VMESS_PORT,
       "users": [
@@ -212,25 +212,6 @@ cat > config.json <<EOF
         "type": "ws",
         "path": "/vmess-argo",
         "early_data_header_name": "Sec-WebSocket-Protocol"
-      }
-    },
-    {
-      "tag": "tuic-in",
-      "type": "tuic",
-      "listen": "$available_ip",
-      "listen_port": $TUIC_PORT,
-      "users": [
-        {
-          "uuid": "$UUID",
-          "password": "admin123"
-        }
-      ],
-      "congestion_control": "bbr",
-      "tls": {
-        "enabled": true,
-        "alpn": ["h3"],
-        "certificate_path": "cert.pem",
-        "key_path": "private.key"
       }
     }
   ],
